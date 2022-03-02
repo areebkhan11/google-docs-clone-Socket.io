@@ -4,7 +4,7 @@ import {Server } from 'socket.io' ;
 const PORT = 9000;
 
 const io = new Server (PORT, {
-    cores:{
+    cors:{
         origin:'http://localhost:3000',
         methods:['GET', 'POST']
     }
@@ -12,5 +12,5 @@ const io = new Server (PORT, {
 
 
 io.on('connection',  socket => {
-
+    console.log("connected")
 });
