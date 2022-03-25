@@ -50,23 +50,23 @@ const Editor =  () => {
         return () =>  {
             socketServer.disconnect();
         }
-    })
+    },[])
 
     useEffect(()=>{
-
+        if (socket === null || quill === null ) return; 
         const handleChange = (delta, oldData, source) =>{
              if(source !== 'user') return
-                socket.emit('send-changes', delta);
+             socket &&  socket.emit('send-changes', delta);
         }
         
-             quill.on('text-change', handleChange)
+        quill && quill.on('text-change', handleChange)
            
 
             return () =>{
-                quill.off('text-change', handleChange)
+                quill &&  quill.off('text-change', handleChange)
             }
    
-    })
+    },[quill, socket])
 
 
 
